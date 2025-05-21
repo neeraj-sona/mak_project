@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>makBig - Admin Chat Control</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        makblue: '#2563EB',
+                        makgreen: '#10B981',
+                        makred: '#EF4444',
+                        makyellow: '#F59E0B',
+                        makgray: '#F3F4F6',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 font-sans">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <div class="w-64 bg-white border-r border-gray-200 flex flex-col">
+            <!-- Header -->
+            <div class="p-4 border-b border-gray-200">
+                <h1 class="text-xl font-bold text-makblue">makBig Admin</h1>
+                <p class="text-xs text-gray-500">Chat Control Panel</p>
+            </div>
+            
+            <!-- Navigation -->
+            <div class="flex-1 overflow-y-auto p-4">
+                <nav>
+                    <h2 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Moderation</h2>
+                    <ul class="space-y-1">
+                        <li>
+                            <a href="#" class="flex items-center px-3 py-2 text-sm rounded bg-makblue text-white">
+                                <i class="fas fa-flag mr-2"></i> Reported Messages
+                                <span class="ml-auto bg-makred text-white text-xs px-2 py-0.5 rounded-full">5</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex items-center px-3 py-2 text-sm rounded text-gray-700 hover:bg-gray-100">
+                                <i class="fas fa-ban mr-2"></i> Banned Users
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex items-center px-3 py-2 text-sm rounded text-gray-700 hover:bg-gray-100">
+                                <i class="fas fa-filter mr-2"></i> Word Filters
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex items-center px-3 py-2 text-sm rounded text-gray-700 hover:bg-gray-100">
+                                <i class="fas fa-chart-bar mr-2"></i> Chat Analytics
+                            </a>
+                        </li>
+                    </ul>
+
+                    <h2 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mt-6 mb-2">Channels</h2>
+                    <ul class="space-y-1">
+                        <li>
+                            <a href="#" class="flex items-center px-3 py-2 text-sm rounded text-gray-700 hover:bg-gray-100">
+                                <i class="fas fa-hashtag mr-2 text-gray-400"></i> #general
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex items-center px-3 py-2 text-sm rounded text-gray-700 hover:bg-gray-100">
+                                <i class="fas fa-hashtag mr-2 text-gray-400"></i> #module-1-help
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex items-center px-3 py-2 text-sm rounded text-gray-700 hover:bg-gray-100">
+                                <i class="fas fa-thumbtack mr-2 text-gray-400"></i> #announcements
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            
+            <!-- Admin Info -->
+            <div class="p-4 border-t border-gray-200">
+                <div class="flex items-center">
+                    <img src="https://i.pravatar.cc/40?img=11" alt="Admin" class="w-8 h-8 rounded-full">
+                    <div class="ml-3">
+                        <p class="text-sm font-medium">Admin User</p>
+                        <p class="text-xs text-gray-500">Super Admin</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <!-- Top Bar -->
+            <header class="bg-white border-b border-gray-200 p-4">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-lg font-semibold text-gray-800">Reported Messages</h2>
+                    <div class="flex space-x-2">
+                        <button class="p-2 text-gray-500 hover:text-makblue hover:bg-gray-100 rounded-full">
+                            <i class="fas fa-sync-alt"></i>
+                        </button>
+                        <button class="p-2 text-gray-500 hover:text-makblue hover:bg-gray-100 rounded-full">
+                            <i class="fas fa-filter"></i>
+                        </button>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Content Area -->
+            <main class="flex-1 overflow-y-auto p-4 bg-makgray">
+                <!-- Filters -->
+                <div class="mb-4 bg-white p-3 rounded-lg shadow-sm">
+                    <div class="flex items-center space-x-4">
+                        <div>
+                            <label class="block text-xs font-medium text-gray-500 mb-1">Status</label>
+                            <select class="text-sm border border-gray-300 rounded px-3 py-1 focus:outline-none focus:ring-2 focus:ring-makblue">
+                                <option>All Reports</option>
+                                <option>Pending</option>
+                                <option>Resolved</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-gray-500 mb-1">Channel</label>
+                            <select class="text-sm border border-gray-300 rounded px-3 py-1 focus:outline-none focus:ring-2 focus:ring-makblue">
+                                <option>All Channels</option>
+                                <option>#general</option>
+                                <option>#module-1-help</option>
+                                <option>#announcements</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-gray-500 mb-1">Date Range</label>
+                            <select class="text-sm border border-gray-300 rounded px-3 py-1 focus:outline-none focus:ring-2 focus:ring-makblue">
+                                <option>Last 24 hours</option>
+                                <option>Last 7 days</option>
+                                <option>Last 30 days</option>
+                                <option>Custom range</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Reported Messages -->
+                <div class="space-y-4">
+                    <!-- Report Card 1 -->
+                    <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+                        <div class="p-4 border-b border-gray-200 flex items-center justify-between bg-red-50">
+                            <div class="flex items-center">
+                                <span class="bg-makred text-white text-xs px-2 py-0.5 rounded-full mr-2">Harassment</span>
+                                <span class="text-xs text-gray-500">Reported 15 min ago</span>
+                            </div>
+                            <button class="text-xs text-makblue hover:underline">View Context</button>
+                        </div>
+                        <div class="p-4">
+                            <div class="flex items-start">
+                                <img src="https://i.pravatar.cc/40?img=5" alt="User" class="w-10 h-10 rounded-full mr-3">
+                                <div class="flex-1">
+                                    <div class="flex items-baseline">
+                                        <span class="font-medium">JohnDoe123</span>
+                                        <span class="ml-2 text-xs text-gray-500">Today at 2:30 PM</span>
+                                        <span class="ml-2 px-2 py-0.5 bg-makgreen text-white text-xs rounded-full">Student</span>
+                                    </div>
+                                    <p class="mt-1 text-sm">You're such a loser, why are you even in this program?</p>
+                                    <div class="mt-2 text-xs text-gray-500">
+                                        <p><span class="font-medium">Reported by:</span> JaneSmith456 (Student)</p>
+                                        <p><span class="font-medium">Reason:</span> Personal harassment and bullying</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 px-4 py-3 flex justify-end space-x-2">
+                            <button class="px-3 py-1 bg-makgreen text-white text-sm rounded hover:bg-green-600">
+                                <i class="fas fa-check mr-1"></i> Dismiss
+                            </button>
+                            <button class="px-3 py-1 bg-makred text-white text-sm rounded hover:bg-red-600">
+                                <i class="fas fa-trash-alt mr-1"></i> Delete Message
+                            </button>
+                            <button class="px-3 py-1 bg-makyellow text-white text-sm rounded hover:bg-yellow-600">
+                                <i class="fas fa-user-slash mr-1"></i> Ban User
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Report Card 2 -->
+                    <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+                        <div class="p-4 border-b border-gray-200 flex items-center justify-between bg-yellow-50">
+                            <div class="flex items-center">
+                                <span class="bg-makyellow text-white text-xs px-2 py-0.5 rounded-full mr-2">Spam</span>
+                                <span class="text-xs text-gray-500">Reported 1 hour ago</span>
+                            </div>
+                            <button class="text-xs text-makblue hover:underline">View Context</button>
+                        </div>
+                        <div class="p-4">
+                            <div class="flex items-start">
+                                <img src="https://i.pravatar.cc/40?img=6" alt="User" class="w-10 h-10 rounded-full mr-3">
+                                <div class="flex-1">
+                                    <div class="flex items-baseline">
+                                        <span class="font-medium">SpamBot2023</span>
+                                        <span class="ml-2 text-xs text-gray-500">Today at 1:45 PM</span>
+                                        <span class="ml-2 px-2 py-0.5 bg-makgreen text-white text-xs rounded-full">Student</span>
+                                    </div>
+                                    <p class="mt-1 text-sm">Check out my amazing website! www.fakesite.com - 50% off today only!!!</p>
+                                    <div class="mt-2 text-xs text-gray-500">
+                                        <p><span class="font-medium">Reported by:</span> 3 users</p>
+                                        <p><span class="font-medium">Reason:</span> Spam and external links</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 px-4 py-3 flex justify-end space-x-2">
+                            <button class="px-3 py-1 bg-makgreen text-white text-sm rounded hover:bg-green-600">
+                                <i class="fas fa-check mr-1"></i> Dismiss
+                            </button>
+                            <button class="px-3 py-1 bg-makred text-white text-sm rounded hover:bg-red-600">
+                                <i class="fas fa-trash-alt mr-1"></i> Delete Message
+                            </button>
+                            <button class="px-3 py-1 bg-makyellow text-white text-sm rounded hover:bg-yellow-600">
+                                <i class="fas fa-user-slash mr-1"></i> Ban User
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Report Card 3 -->
+                    <div class="bg-white rounded-lg shadow-sm overflow-hidden border border-green-100">
+                        <div class="p-4 border-b border-gray-200 flex items-center justify-between bg-green-50">
+                            <div class="flex items-center">
+                                <span class="bg-green-500 text-white text-xs px-2 py-0.5 rounded-full mr-2">Resolved</span>
+                                <span class="text-xs text-gray-500">Resolved 3 hours ago by AdminUser</span>
+                            </div>
+                            <button class="text-xs text-makblue hover:underline">View Context</button>
+                        </div>
+                        <div class="p-4">
+                            <div class="flex items-start">
+                                <img src="https://i.pravatar.cc/40?img=7" alt="User" class="w-10 h-10 rounded-full mr-3">
+                                <div class="flex-1">
+                                    <div class="flex items-baseline">
+                                        <span class="font-medium">NewCoder</span>
+                                        <span class="ml-2 text-xs text-gray-500">Today at 10:15 AM</span>
+                                        <span class="ml-2 px-2 py-0.5 bg-makgreen text-white text-xs rounded-full">Student</span>
+                                    </div>
+                                    <p class="mt-1 text-sm line-through text-gray-400">This is a test message with banned words</p>
+                                    <div class="mt-2 text-xs text-gray-500">
+                                        <p><span class="font-medium">Reported by:</span> AutoModerator</p>
+                                        <p><span class="font-medium">Reason:</span> Banned words detected</p>
+                                        <p class="mt-1 text-green-600"><i class="fas fa-check-circle mr-1"></i> Message deleted and user warned</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+        
+        <!-- Right Sidebar - Ban User Panel -->
+        <div class="w-80 bg-white border-l border-gray-200 flex flex-col hidden lg:flex">
+            <div class="p-4 border-b border-gray-200">
+                <h2 class="font-semibold text-gray-800">Ban User</h2>
+            </div>
+            <div class="flex-1 overflow-y-auto p-4">
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">User</label>
+                        <div class="flex items-center p-2 bg-gray-50 rounded">
+                            <img src="https://i.pravatar.cc/40?img=5" alt="User" class="w-8 h-8 rounded-full mr-2">
+                            <span>JohnDoe123</span>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Ban Duration</label>
+                        <select class="w-full border border-gray-300 rounded p-2 text-sm focus:ring-makblue focus:border-makblue">
+                            <option>24 hours</option>
+                            <option>7 days</option>
+                            <option>30 days</option>
+                            <option>Permanent</option>
+                            <option>Custom...</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Reason</label>
+                        <select class="w-full border border-gray-300 rounded p-2 text-sm focus:ring-makblue focus:border-makblue mb-2">
+                            <option>Harassment</option>
+                            <option>Spam</option>
+                            <option>Inappropriate content</option>
+                            <option>Other</option>
+                        </select>
+                        <textarea class="w-full border border-gray-300 rounded p-2 text-sm h-20 focus:ring-makblue focus:border-makblue" placeholder="Additional details..."></textarea>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Notify User</label>
+                        <div class="flex items-center">
+                            <input type="checkbox" id="notify-user" class="h-4 w-4 text-makblue focus:ring-makblue border-gray-300 rounded">
+                            <label for="notify-user" class="ml-2 block text-sm text-gray-700">Send notification email</label>
+                        </div>
+                    </div>
+                    
+                    <div class="pt-4">
+                        <button class="w-full bg-makred text-white py-2 rounded hover:bg-red-600">
+                            Confirm Ban
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Ban Modal -->
+    <div id="ban-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg w-full max-w-md mx-4 max-h-[90vh] overflow-y-auto">
+            <div class="p-4 border-b border-gray-200 flex justify-between items-center">
+                <h3 class="font-semibold text-lg">Ban User</h3>
+                <button id="close-ban-modal" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="p-4">
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">User</label>
+                        <div class="flex items-center p-2 bg-gray-50 rounded">
+                            <img src="https://i.pravatar.cc/40?img=5" alt="User" class="w-8 h-8 rounded-full mr-2">
+                            <span>JohnDoe123</span>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Ban Duration</label>
+                        <select class="w-full border border-gray-300 rounded p-2 text-sm focus:ring-makblue focus:border-makblue">
+                            <option>24 hours</option>
+                            <option>7 days</option>
+                            <option>30 days</option>
+                            <option>Permanent</option>
+                            <option>Custom...</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Reason</label>
+                        <select class="w-full border border-gray-300 rounded p-2 text-sm focus:ring-makblue focus:border-makblue mb-2">
+                            <option>Harassment</option>
+                            <option>Spam</option>
+                            <option>Inappropriate content</option>
+                            <option>Other</option>
+                        </select>
+                        <textarea class="w-full border border-gray-300 rounded p-2 text-sm h-20 focus:ring-makblue focus:border-makblue" placeholder="Additional details..."></textarea>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Notify User</label>
+                        <div class="flex items-center">
+                            <input type="checkbox" id="mobile-notify-user" class="h-4 w-4 text-makblue focus:ring-makblue border-gray-300 rounded">
+                            <label for="mobile-notify-user" class="ml-2 block text-sm text-gray-700">Send notification email</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="p-4 border-t border-gray-200 flex justify-end space-x-2">
+                <button id="cancel-ban" class="px-4 py-2 border border-gray-300 rounded text-gray-700 hover:bg-gray-50">
+                    Cancel
+                </button>
+                <button class="px-4 py-2 bg-makred text-white rounded hover:bg-red-600">
+                    Confirm Ban
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simple demo functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Show ban modal when ban button is clicked
+            document.querySelectorAll('.bg-makyellow').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.getElementById('ban-modal').classList.remove('hidden');
+                });
+            });
+            
+            // Close modal
+            document.getElementById('close-ban-modal').addEventListener('click', function() {
+                document.getElementById('ban-modal').classList.add('hidden');
+            });
+            
+            document.getElementById('cancel-ban').addEventListener('click', function() {
+                document.getElementById('ban-modal').classList.add('hidden');
+            });
+        });
+    </script>
+</body>
+</html>
